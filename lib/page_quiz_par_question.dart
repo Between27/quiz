@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:quiz/accueil.dart';
+import 'package:quiz/liste_des_questions.dart';
 import 'package:quiz/question_choix.dart';
+import 'package:quiz/questionsH.dart';
 
 import 'ligne_reponse.dart';
 
@@ -29,6 +34,25 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
   void barre(BuildContext context, String m) {
     final barre = SnackBar(content: Text(m));
     ScaffoldMessenger.of(context).showSnackBar(barre);
+    Timer(const Duration(seconds: 1), () {
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    });
+  }
+
+  void attente() async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (QuizTheme.index < 2) {
+      QuizTheme.index += 1;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  QuizTheme(theme: harryPotter).theme[QuizTheme.index]));
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Accueil()));
+    }
   }
 
   @override
@@ -56,6 +80,11 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
                   const SizedBox(
                     height: 60,
                   ),
+                  if (choix != "")
+                    Text(
+                      "Vous avez choisis la réponse $choix",
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   for (var item in widget.niveau.reponses)
                     LigneReponse(
                       id: item.id,
@@ -84,8 +113,10 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
                               if (!appui) {
                                 verification();
                                 appui = true;
-                              } else
+                              } else {
                                 return;
+                              }
+                              attente();
                             });
                           },
                           child: const Center(child: Text("Valider"))),
@@ -111,37 +142,3 @@ class QRV {
       required this.reponses,
       required this.valide});
 }
-
-QRV harry1 = QRV(question: ari, reponses: q, valide: "b");
-
-const String ari = "Qu'est-ce que Voldemort a laissé à Harry Potter ?";
-List<LigneReponse> q = [
-  LigneReponse(
-    id: "a",
-    proposition: "Un orcrux",
-    couleurId: const Color(0xFFFFA726),
-    bonne: false,
-    appuiye: false,
-  ),
-  LigneReponse(
-    id: "b",
-    proposition: "Une cicatrice en forme d'éclair",
-    couleurId: const Color(0xFF4DD0e1),
-    bonne: true,
-    appuiye: false,
-  ),
-  LigneReponse(
-    id: "c",
-    proposition: "Une baguette magique",
-    couleurId: const Color(0xFF9575cd),
-    bonne: false,
-    appuiye: false,
-  ),
-  LigneReponse(
-    id: "d",
-    proposition: "Un rat",
-    couleurId: const Color(0xFF64DD17),
-    bonne: false,
-    appuiye: false,
-  )
-];

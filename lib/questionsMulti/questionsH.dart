@@ -1,31 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:quiz/page_quiz_par_question.dart';
-import 'ligne_reponse.dart';
+// ignore_for_file: file_names
 
-List<PagedeQuizMultiple> harryPotter = [
-  PagedeQuizMultiple(
-    niveau: QRV(
-      question: "Qu'est-ce que Voldemort a laissé à Harry Potter ?",
-      reponses: harry1,
-      valide: "b",
-    ),
+import 'package:flutter/material.dart';
+import 'package:quiz/pages/pageDeQuizMultiple.dart';
+import '../ligneReponse.dart';
+
+// ignore: non_constant_identifier_names
+List<QRV> multiH = [
+  QRV(
+    question: "Qu'est-ce que Voldemort a laissé à Harry Potter ?",
+    reponses: rH1,
+    valide: "b",
   ),
-  PagedeQuizMultiple(
-    niveau: QRV(
-        question:
-            "Quel sort Harry a-t-il appris dans le livre du prince de sang-melé",
-        reponses: harry2,
-        valide: "c"),
-  ),
-  PagedeQuizMultiple(
-      niveau: QRV(
-          question:
-              "Quel est le titre du dernier jeu basé sur l'univers d'Harry Potter ?",
-          reponses: harry3,
-          valide: "a"))
+  QRV(
+      question:
+          "Quel sort Harry a-t-il appris dans le livre du prince de sang-melé",
+      reponses: rH2,
+      valide: "c"),
+  QRV(
+      question:
+          "Quel est le titre du dernier jeu basé sur l'univers d'Harry Potter ?",
+      reponses: rH3,
+      valide: "a"),
 ];
 
-List<LigneReponse> harry1 = [
+List<LigneReponse> rH1 = [
   LigneReponse(
     id: "a",
     proposition: "Un orcrux",
@@ -55,7 +53,7 @@ List<LigneReponse> harry1 = [
     appuiye: false,
   )
 ];
-List<LigneReponse> harry2 = [
+List<LigneReponse> rH2 = [
   LigneReponse(
     id: "a",
     proposition: "Repoustout",
@@ -85,7 +83,7 @@ List<LigneReponse> harry2 = [
     appuiye: false,
   )
 ];
-List<LigneReponse> harry3 = [
+List<LigneReponse> rH3 = [
   LigneReponse(
     id: "a",
     proposition: "Hogwarts Legacy",

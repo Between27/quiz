@@ -1,5 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class LigneReponse extends StatefulWidget {
   final String proposition;
   final String id;

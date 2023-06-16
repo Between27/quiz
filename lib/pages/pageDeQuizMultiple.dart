@@ -1,17 +1,16 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:quiz/accueil.dart';
-import 'package:quiz/liste_des_questions.dart';
-import 'package:quiz/question_choix.dart';
-import 'package:quiz/questionsH.dart';
+import 'package:quiz/questionCM.dart';
 
-import 'ligne_reponse.dart';
+import '../ligneReponse.dart';
 
+// ignore: must_be_immutable
 class PagedeQuizMultiple extends StatefulWidget {
-  final QRV niveau;
-
-  const PagedeQuizMultiple({super.key, required this.niveau});
+  final List<QRV> tabQRV;
+  int index = 0;
+  PagedeQuizMultiple({super.key, required this.tabQRV});
 
   @override
   State<PagedeQuizMultiple> createState() => _PagedeQuizMultipleState();
@@ -19,11 +18,10 @@ class PagedeQuizMultiple extends StatefulWidget {
 
 class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
   bool appui = false;
-
   String choix = "";
   void verification() {
     String message;
-    if (choix == widget.niveau.valide) {
+    if (choix == widget.tabQRV[widget.index].valide) {
       message = "Bonne réponse";
     } else {
       message = "Mauvaise réponse";
@@ -42,16 +40,15 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
   void attente() async {
     await Future.delayed(const Duration(seconds: 1));
 
-    if (QuizTheme.index < 2) {
-      QuizTheme.index += 1;
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  QuizTheme(theme: harryPotter).theme[QuizTheme.index]));
+    if (widget.index < widget.tabQRV.length - 1) {
+      setState(() {
+        widget.index++;
+        appui = false;
+        choix = "";
+      });
     } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Accueil()));
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     }
   }
 
@@ -75,7 +72,7 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   QuestionCM(
-                    question: widget.niveau.question,
+                    question: widget.tabQRV[widget.index].question,
                   ),
                   const SizedBox(
                     height: 60,
@@ -85,7 +82,7 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
                       "Vous avez choisis la réponse $choix",
                       style: const TextStyle(fontSize: 20),
                     ),
-                  for (var item in widget.niveau.reponses)
+                  for (var item in widget.tabQRV[widget.index].reponses)
                     LigneReponse(
                       id: item.id,
                       proposition: item.proposition,
@@ -110,7 +107,7 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
                       ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              if (!appui) {
+                              if (!appui && choix != "") {
                                 verification();
                                 appui = true;
                               } else {

@@ -17,6 +17,7 @@ class PageDeQuizSimple extends StatefulWidget {
 
 class _PageDeQuizSimpleState extends State<PageDeQuizSimple> {
   String message = "";
+  int num = 1;
   void verification() {
     for (var rep in widget.tabQRS[widget.index].valide) {
       if (widget.controller.text.trim().toLowerCase() == rep) {
@@ -47,8 +48,10 @@ class _PageDeQuizSimpleState extends State<PageDeQuizSimple> {
         setState(() {
           widget.index++;
           widget.controller.text = "";
+          num++;
         });
       } else {
+        num = 1;
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
       }
     }
@@ -86,21 +89,23 @@ class _PageDeQuizSimpleState extends State<PageDeQuizSimple> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Questions à réponse simple",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Text(
+                    "Questions N°$num",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 40,
                   ),
                   QuestionCM(question: widget.tabQRS[widget.index].question),
                   const SizedBox(
-                    height: 60,
+                    height: 40,
                   ),
 
                   Padding(
                     padding: const EdgeInsets.only(left: 100, right: 100),
                     child: TextField(
+                      textAlign: TextAlign.center,
                       controller: widget.controller,
                       decoration: const InputDecoration(
                         filled: true,

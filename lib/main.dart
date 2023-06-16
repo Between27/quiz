@@ -13,13 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'QUIZ',
+        title: 'BETWEEN',
         debugShowCheckedModeBanner: false,
         initialRoute: '/home',
         routes: {
           '/home': (context) => const Accueil(),
           '/qcm': (context) => const ChoixThemeMultiple(),
-          '/qs': (context) => const ChoixThemeSimple()
+          '/qs': (context) => const ChoixThemeSimple(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

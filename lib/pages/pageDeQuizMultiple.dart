@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -19,6 +19,8 @@ class PagedeQuizMultiple extends StatefulWidget {
 class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
   bool appui = false;
   String choix = "";
+  int num = 1;
+
   void verification() {
     String message;
     if (choix == widget.tabQRV[widget.index].valide) {
@@ -43,11 +45,12 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
     if (widget.index < widget.tabQRV.length - 1) {
       setState(() {
         widget.index++;
+        num++;
         appui = false;
         choix = "";
       });
     } else {
-      // ignore: use_build_context_synchronously
+      num = 1;
       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     }
   }
@@ -56,7 +59,7 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("QUIZ"),
+          title: const Text("Quiz avec proposition de réponses"),
           backgroundColor: Colors.blue,
         ),
         backgroundColor: Colors.teal[100],
@@ -67,21 +70,30 @@ class _PagedeQuizMultipleState extends State<PagedeQuizMultiple> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Questions à 4 Reponses",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Text(
+                    "Questions N°$num",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   QuestionCM(
                     question: widget.tabQRV[widget.index].question,
                   ),
                   const SizedBox(
-                    height: 60,
+                    height: 30,
                   ),
-                  if (choix != "")
-                    Text(
-                      "Vous avez choisis la réponse $choix",
-                      style: const TextStyle(fontSize: 20),
-                    ),
+                  SizedBox(
+                    height: 30,
+                    child: choix != ""
+                        ? Text(
+                            "Vous avez choisi la réponse $choix",
+                            style: const TextStyle(fontSize: 20),
+                          )
+                        : null,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+
                   for (var item in widget.tabQRV[widget.index].reponses)
                     LigneReponse(
                       id: item.id,

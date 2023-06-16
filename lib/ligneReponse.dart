@@ -52,7 +52,7 @@ class _LigneReponseState extends State<LigneReponse> {
                 child: Text(
                   widget.id, // Caractère à afficher dans le cercle
                   style: const TextStyle(
-                    fontSize: 22,
+                    fontSize: 20,
                     color: Colors.white, // Couleur du texte
                   ),
                 ),

@@ -9,7 +9,7 @@ class Accueil extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("QUIZ"),
+        title: const Text("Accueil"),
         backgroundColor: Colors.blue,
       ),
       backgroundColor: Colors.teal[100],
@@ -28,6 +28,11 @@ class Accueil extends StatelessWidget {
                   Navigator.pushNamed(context, '/qs');
                 },
                 child: const Text("Questions sans propositions de Réponses")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/qi');
+                },
+                child: const Text("Images")),
           ],
         ),
       ),

@@ -49,11 +49,16 @@ class _LigneReponseState extends State<LigneReponse> {
                 color: widget.couleurId, // Couleur de fond du cercle
               ),
               child: Center(
-                child: Text(
-                  widget.id, // Caractère à afficher dans le cercle
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white, // Couleur du texte
+                child: OverflowBox(
+                  maxWidth: double.infinity,
+                  child: Text(
+                    widget.id, // Caractère à afficher dans le cercle
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white, // Couleur du texte
+                    ),
                   ),
                 ),
               ),

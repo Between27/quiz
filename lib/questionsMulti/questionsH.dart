@@ -295,37 +295,6 @@ List<LigneReponse> rBleach3 = [
 List<LigneReponse> rBleach4 = [
   LigneReponse(
     id: "a",
-    proposition: "Affaiblir l'adversaire à chaque coup porté",
-    couleurId: const Color(0xFFFFA726),
-    bonne: true,
-    appuiye: false,
-  ),
-  LigneReponse(
-    id: "b",
-    proposition: "Alourdir le métal touché après chaque coup",
-    couleurId: const Color(0xFF4DD0e1),
-    bonne: false,
-    appuiye: false,
-  ),
-  LigneReponse(
-    id: "c",
-    proposition: "Diminuer l'espérance de vie de l'adversaire",
-    couleurId: const Color(0xFF9575cd),
-    bonne: false,
-    appuiye: false,
-  ),
-  LigneReponse(
-    id: "d",
-    proposition: "Empoisonner l'adversaire",
-    couleurId: const Color(0xFF64DD17),
-    bonne: false,
-    appuiye: false,
-  )
-];
-
-List<LigneReponse> rBleach5 = [
-  LigneReponse(
-    id: "a",
     proposition: "Affaiblir l'adversaire",
     couleurId: const Color(0xFFFFA726),
     bonne: true,

@@ -28,11 +28,6 @@ class Accueil extends StatelessWidget {
                   Navigator.pushNamed(context, '/qs');
                 },
                 child: const Text("Questions sans propositions de Réponses")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/qi');
-                },
-                child: const Text("Images")),
           ],
         ),
       ),
